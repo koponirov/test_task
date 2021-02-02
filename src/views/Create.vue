@@ -13,13 +13,13 @@
 
           <div class="input-field">
             <textarea v-model="description" id="description" class="materialize-textarea" ></textarea>
-            <label for="description">Textarea</label>
+            <label for="description">Description</label>
             <span class="character-counter" style="float: right; font-size: 12px;">{{description.length}}/2048</span>
           </div>
 
           <input ref="datepicker" type="text" >
 
-          <button class="btn" type="submit">Create task</button>
+          <button class="btn blue-grey" type="submit">Create task</button>
         </div>
       </form>
     </div>
@@ -43,10 +43,10 @@ export default {
       const task = {
         title: this.title,
         description: this.description,
-        id: new Date(),
+        id: new Date().getMilliseconds() * new Date().getSeconds(),
         status: 'active',
         date: this.date.date,
-        chips: this.chips.chipsData.map((c) => c.tag),
+        chips: this.chips.chipsData,
       };
       this.$store.dispatch('createTask', task);
       this.$router.push('/list');
